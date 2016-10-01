@@ -1,5 +1,5 @@
 import React from 'react';
-import { range, flatten, sampleSize } from 'lodash';
+import { zipObject, range, flatten, sampleSize } from 'lodash';
 
 import Cell from './Cell';
 import Row from './Row';
@@ -15,7 +15,10 @@ class Game extends React.Component {
       return range(columns).map(colId => `${rowId}${colId}`);
     });
 
+    this.word = 'junior';
     this.activeCells = sampleSize(flatten(this.matrix), activeCellsCount);
+
+    this.letters = zipObject(this.activeCells, this.word);
 
     this.state = {
       gameState: 'ready',
@@ -25,15 +28,10 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    this.memorizeTimerId = setTimeout(() => {
-      this.setState({ gameState: 'memorize' }, () => {
-        this.recallTimerId = setTimeout(this.startRecallMode.bind(this), 2000);
-      });
-    }, 2000);
+    this.recallTimerId = setTimeout(this.startRecallMode.bind(this), 3000);
   }
 
   componentWillUnmount() {
-    clearTimeout(this.memorizeTimerId);
     clearTimeout(this.recallTimerId);
     this.finishGame();
   }
@@ -86,16 +84,16 @@ class Game extends React.Component {
   }
 
   render() {
-    let showActiveCells = ['memorize', 'lost'].indexOf(this.state.gameState) > -1;
-
     return (
       <div className="grid">
         {this.matrix.map((row, ri) => (
           <Row key={ri}>
             {row.map(cellId =>
               <Cell key={cellId} id={cellId}
+                    letter={this.letters[cellId]}
                     activeCells={this.activeCells}
-                    showActiveCells={showActiveCells}
+                    showAnswer={this.state.gameState === 'lost'}
+                    disabled={this.state.gameState === 'ready'}
                     recordGuess={this.recordGuess.bind(this)}
                     correctGuesses={this.state.correctGuesses}
                     wrongGuesses={this.state.wrongGuesses}
@@ -104,6 +102,7 @@ class Game extends React.Component {
           </Row>
         ))}
         <Footer gameState={this.state.gameState}
+                word={this.word}
                 playAgain={this.props.playAgain}
                 correctGuesses={this.state.correctGuesses}
                 activeCellsCount={this.props.gameLevel.activeCellsCount} />

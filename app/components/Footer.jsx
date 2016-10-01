@@ -1,15 +1,6 @@
 import React from 'react';
 
 class Footer extends React.Component {
-  remainingCount() {
-    let remainingCountEl = (
-      <div className="remaining-count">
-        {this.props.activeCellsCount - this.props.correctGuesses.length}
-      </div>
-    );
-
-    if (this.props.gameState === 'recall') return remainingCountEl;
-  }
 
   playAgain() {
     let playAgainEl = (
@@ -24,12 +15,16 @@ class Footer extends React.Component {
   }
 
   render() {
+    let hintClassName = `hint ${this.props.gameState}`;
+
     return (
       <div className="footer">
-        <div className="hint">
+        <div className="word-box">
+          guess the word: <em className="word">{this.props.word}</em>
+        </div>
+        <div className={hintClassName}>
           {this.props.hints[this.props.gameState]}
         </div>
-        {this.remainingCount()}
         {this.playAgain()}
       </div>
     );
@@ -39,8 +34,7 @@ class Footer extends React.Component {
 Footer.defaultProps = {
   hints: {
     ready: 'Get Ready',
-    memorize: 'Memorize',
-    recall: 'Recall',
+    recall: 'Go!',
     won: 'Well Played',
     lost: 'Game Over'
   }

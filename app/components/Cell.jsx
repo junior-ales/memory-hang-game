@@ -14,12 +14,10 @@ class Cell extends React.Component {
   }
 
   active() {
-    //console.log('active');
     return this.props.activeCells.indexOf(this.props.id) > -1;
   }
 
   guessState() {
-    //console.log('guessState');
     let isCorrectGuess = this.props.correctGuesses.indexOf(this.props.id) > -1;
     let isWrongGuess = this.props.wrongGuesses.indexOf(this.props.id) > -1;
 
@@ -29,14 +27,19 @@ class Cell extends React.Component {
 
   render() {
     let className = 'cell';
-    if (this.props.showActiveCells && this.active()) {
+    if (this.props.showAnswer && this.active()) {
       className += ' active';
+    }
+
+    if (this.props.disabled) {
+      className += ' disabled';
     }
 
     className += ' guess-' + this.guessState();
 
     return (
       <div className={className} onClick={this.handleClick.bind(this)}>
+        <em className="guess-letter">&nbsp;{this.props.letter}</em>
       </div>
     );
   }
