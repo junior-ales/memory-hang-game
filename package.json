@@ -1,15 +1,15 @@
 {
-  "name": "memory-grid-game",
-  "description": "A memory grid game to train react js",
+  "name": "memory-hang-game",
+  "description": "Memory and hangman mix game",
   "author": "Junior Ales",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/junior-ales/memory-grid-game"
+    "url": "https://github.com/junior-ales/memory-hang-game"
   },
   "scripts": {
     "start": "brunch watch --server",
-    "prod": "brunch build --production"
+    "prod": "rm -Rf public/* && brunch build --production"
   },
   "dependencies": {
     "lodash": "^4.16.2",
@@ -24,6 +24,8 @@
     "brunch": "^2.4.0",
     "clean-css-brunch": "^2.0.0",
     "css-brunch": "^2.0.0",
+    "eslint-brunch": "^3.11.1",
+    "eslint-plugin-react": "^6.3.0",
     "javascript-brunch": "^2.0.0",
     "uglify-js-brunch": "^2.0.0"
   }

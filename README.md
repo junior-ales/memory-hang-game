@@ -1,3 +1,3 @@
-# Memory Grid Game
+# Memory Hang Game
 
-React Succinctly book exercise
+Memory and hangman mix game
