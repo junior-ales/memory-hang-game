@@ -9,14 +9,14 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
 
-    const { rows, columns, activeCellsCount } = props.gameLevel;
+    const { rows, columns } = props.gameLevel;
 
     this.matrix = range(rows).map(rowId => {
       return range(columns).map(colId => `${rowId}${colId}`);
     });
 
     this.word = 'junior';
-    this.activeCells = sampleSize(flatten(this.matrix), activeCellsCount);
+    this.activeCells = sampleSize(flatten(this.matrix), this.word.length);
 
     this.letters = zipObject(this.activeCells, this.word);
 
@@ -71,7 +71,7 @@ class Game extends React.Component {
 
     userGuessIsCorrect ? correctGuesses.push(cellId) : wrongGuesses.push(cellId);
 
-    if (correctGuesses.length === this.props.gameLevel.activeCellsCount) {
+    if (correctGuesses.length === this.word.length) {
       gameState = this.finishGame('won');
       this.props.updateScore(this.calculateScore(wrongGuesses.length));
     }
@@ -93,7 +93,7 @@ class Game extends React.Component {
                     letter={this.letters[cellId]}
                     activeCells={this.activeCells}
                     showAnswer={this.state.gameState === 'lost'}
-                    disabled={this.state.gameState === 'ready'}
+                    enabled={this.state.gameState === 'recall'}
                     recordGuess={this.recordGuess.bind(this)}
                     correctGuesses={this.state.correctGuesses}
                     wrongGuesses={this.state.wrongGuesses}
@@ -105,7 +105,7 @@ class Game extends React.Component {
                 word={this.word}
                 playAgain={this.props.playAgain}
                 correctGuesses={this.state.correctGuesses}
-                activeCellsCount={this.props.gameLevel.activeCellsCount} />
+                activeCellsCount={this.word.length} />
       </div>
     );
   }

@@ -15,16 +15,21 @@ body {
   width: 50px;
   height: 50px;
   display: inline-block;
-  border: none;
   background: #f8f8f8;
   margin-right: 5px;
-  box-shadow: 1px 1px 1px #aaa;
   transition: box-shadow ease-out .1s;
+  border: 1px solid #ccc;
+  box-shadow: none;
 }
 
-.cell.disabled {
+.cell.enabled {
+  border: none;
+  box-shadow: 1px 1px 1px #aaa;
+}
+
+.cell.enabled.guess-false,
+.cell.enabled.guess-true {
   box-shadow: none;
-  border: 1px solid #ccc;
 }
 
 .active {
@@ -35,11 +40,13 @@ body {
 .guess-true {
   background-color: #00CC00;
   box-shadow: none;
+  border: none;
 }
 
 .guess-false {
   background-color: #CC0000;
   box-shadow: none;
+  border: none;
 }
 
 .guess-letter {

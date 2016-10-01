@@ -31,8 +31,8 @@ class Cell extends React.Component {
       className += ' active';
     }
 
-    if (this.props.disabled) {
-      className += ' disabled';
+    if (this.props.enabled) {
+      className += ' enabled';
     }
 
     className += ' guess-' + this.guessState();

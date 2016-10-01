@@ -18,17 +18,17 @@ class App extends React.Component {
       gameId: 1,
       totalScore: 0,
       gameLevel: {
-        rows: 5,
-        columns: 5,
-        activeCellsCount: 6
+        rows: 6,
+        columns: 6,
+        wordSize: 6,
+        wrongLetters: 1
       }
     };
   }
 
   playAgain(lastGameStatus) {
     this.setState({
-      gameId: inc(this.state.gameId),
-      gameLevel: nextLevel(lastGameStatus, this.state.gameLevel)
+      gameId: inc(this.state.gameId)
     });
   }
 
