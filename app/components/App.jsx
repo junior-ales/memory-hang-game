@@ -21,7 +21,7 @@ class App extends React.Component {
         rows: 6,
         columns: 6,
         wordSize: 6,
-        wrongLetters: 1
+        wrongLettersQuantity: 3
       }
     };
   }

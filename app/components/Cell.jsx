@@ -14,7 +14,7 @@ class Cell extends React.Component {
   }
 
   active() {
-    return this.props.activeCells.indexOf(this.props.id) > -1;
+    return this.props.correctLetterCells.indexOf(this.props.id) > -1;
   }
 
   guessState() {

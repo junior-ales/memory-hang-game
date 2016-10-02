@@ -1,9 +1,11 @@
 import React from 'react';
-import { zipObject, range, flatten, sampleSize } from 'lodash';
+import { shuffle, assign, toArray, difference, take, drop, zipObject, range, flatten, sampleSize } from 'lodash';
 
 import Cell from './Cell';
 import Row from './Row';
 import Footer from './Footer';
+
+const ALPHABET = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
 class Game extends React.Component {
   constructor(props) {
@@ -16,9 +18,13 @@ class Game extends React.Component {
     });
 
     this.word = 'junior';
-    this.activeCells = sampleSize(flatten(this.matrix), this.word.length);
+    const letterCells = sampleSize(flatten(this.matrix), this.props.gameLevel.wordSize + this.props.gameLevel.wrongLettersQuantity);
+    const wrongLetterCells = drop(letterCells, this.props.gameLevel.wordSize);
+    this.correctLetterCells = take(letterCells, this.props.gameLevel.wordSize);
 
-    this.letters = zipObject(this.activeCells, this.word);
+    const wrongLetters = take(difference(shuffle(ALPHABET), toArray(this.word)), this.props.gameLevel.wrongLettersQuantity);
+
+    this.lettersMap = assign({}, zipObject(this.correctLetterCells, this.word), zipObject(wrongLetterCells, wrongLetters.join('')));
 
     this.state = {
       gameState: 'ready',
@@ -90,8 +96,8 @@ class Game extends React.Component {
           <Row key={ri}>
             {row.map(cellId =>
               <Cell key={cellId} id={cellId}
-                    letter={this.letters[cellId]}
-                    activeCells={this.activeCells}
+                    letter={this.lettersMap[cellId]}
+                    correctLetterCells={this.correctLetterCells}
                     showAnswer={this.state.gameState === 'lost'}
                     enabled={this.state.gameState === 'recall'}
                     recordGuess={this.recordGuess.bind(this)}
