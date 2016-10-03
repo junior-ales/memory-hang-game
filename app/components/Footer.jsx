@@ -1,6 +1,12 @@
 import React from 'react';
+import { replace, sample } from 'lodash';
 
 class Footer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.word = replace(this.props.word, sample(this.props.word), '_')
+  }
 
   playAgain() {
     let playAgainEl = (
@@ -8,6 +14,7 @@ class Footer extends React.Component {
         <button onClick={this.props.playAgain.bind(this, this.props.gameState)}>
           Play Again
         </button>
+        <p>{this.props.word}</p>
       </div>
     );
 
@@ -15,12 +22,12 @@ class Footer extends React.Component {
   }
 
   render() {
-    let hintClassName = `hint ${this.props.gameState}`;
+    const hintClassName = `hint ${this.props.gameState}`;
 
     return (
       <div className="footer">
         <div className="word-box">
-          guess the word: <em className="word">{this.props.word}</em>
+          guess the word: <em className="word">{this.word}</em>
         </div>
         <div className={hintClassName}>
           {this.props.hints[this.props.gameState]}
