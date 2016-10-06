@@ -1,5 +1,10 @@
 import React from 'react';
-import { groupBy, uniq, shuffle, assign, toArray, difference, take, drop, zipObject, range, flatten, sampleSize, sample } from 'lodash';
+import {
+  groupBy, uniq, shuffle,
+  assign, toArray, difference,
+  take, drop, zipObject,
+  range, flatten, sampleSize, sample
+} from 'lodash';
 
 import Cell from './Cell';
 import Row from './Row';

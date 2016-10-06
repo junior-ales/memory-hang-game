@@ -79,6 +79,14 @@ body {
   opacity: 0;
 }
 
+.hint.won {
+  color: #00841d;
+}
+
+.hint.lost {
+  color: #840000;
+}
+
 @keyframes fadeOut {
   from { opacity: 1; }
   to { opacity: 0; }

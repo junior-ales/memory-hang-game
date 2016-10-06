@@ -67,7 +67,7 @@ class App extends React.Component {
                   updateScore={this.updateScore.bind(this)}
                   playAgain={this.playAgain.bind(this)} />
           </section>
-        ) : <p>Initializing Game...</p>}
+        ) : <p>Inicializando o jogo...</p>}
       </div>
     );
   }

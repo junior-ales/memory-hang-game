@@ -27,7 +27,7 @@ class Footer extends React.Component {
     return (
       <div className="footer">
         <div className="word-box">
-          guess the word: <em className="word">{this.word}</em>
+          Adivinhe a palavra: <em className="word">{this.word}</em>
         </div>
         <div className={hintClassName}>
           {this.props.hints[this.props.gameState]}
@@ -40,9 +40,9 @@ class Footer extends React.Component {
 
 Footer.defaultProps = {
   hints: {
-    ready: 'Get Ready',
-    recall: 'Go!',
-    won: 'Well Played',
+    ready: 'Prepare-se',
+    recall: 'Valendo!',
+    won: 'Parabéns!',
     lost: 'Game Over'
   }
 };
