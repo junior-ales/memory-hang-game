@@ -35,7 +35,7 @@ class App extends React.Component {
           alphabet: data.alphabet
         });
       }).catch(err => {
-        console.log(`error fetching data: ${err}`)
+        console.log(`error fetching data: ${err}`);
       });
   }
 
